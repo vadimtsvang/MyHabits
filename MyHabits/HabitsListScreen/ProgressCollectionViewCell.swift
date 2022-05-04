@@ -34,7 +34,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     private lazy var workOutLabel: UILabel = {
         let label = UILabel()
-        label.text = "Всё получится!"
+        label.text = allDone
         label.font = UIFont(name: "SFProText-Semibold", size: 13)
         label.textColor = .systemGrayColor
         label.toAutoLayout()
@@ -61,6 +61,12 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setup(_ todayProgress: Float) {
+            progressView.setProgress(todayProgress, animated: false)
+            let value = Int(todayProgress * 100)
+            percentLabel.text = "\(value)%"
+        }
     
     private func configureUI() {
         contentView.backgroundColor = .lightGrayColor

@@ -11,15 +11,15 @@ class MakeHabitRouter {
     
     var moduleViewController: MakeHabitViewController?
     
-    func makeAlertController(removeHabitCompletion: @escaping VoidCompletion) {
-        let alertController = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку?", preferredStyle: .alert)
-        let deleteAlertButton = UIAlertAction(title: "Удалить", style: .default) { [weak self] _ in
+    func makeAlertController(title: String, removeHabitCompletion: @escaping VoidCompletion) {
+        let alertController = UIAlertController(title: deleteHabit, message: "Вы хотите удалить привычку \n\(title)?", preferredStyle: .alert)
+        let deleteAlertButton = UIAlertAction(title: delete, style: .default) { [weak self] _ in
             self?.moduleViewController?.dismiss(animated: true, completion: {
                 removeHabitCompletion()
             })
         }
         
-        let cancelAlertButton = UIAlertAction(title: "Отмена", style: .cancel)
+        let cancelAlertButton = UIAlertAction(title: cancelButton, style: .cancel)
         
         deleteAlertButton.setValue(UIColor.deleteButtonColor, forKey: "titleTextColor")
         

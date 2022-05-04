@@ -30,6 +30,7 @@ extension HabitDetailsDataSource: UITableViewDataSource {
         cell.textLabel?.text = convertDateFormat(date: dates[indexPath.row])
         cell.accessoryType = .checkmark
         cell.tintColor = .purpleColor
+        cell.selectionStyle = .none
         return cell
     }
 }

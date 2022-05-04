@@ -167,7 +167,7 @@ class MakeHabitContentView: UIView {
             datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             datePicker.heightAnchor.constraint(equalToConstant: 216),
             
-            deleteHabitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18),
+            deleteHabitButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -18),
             deleteHabitButton.heightAnchor.constraint(equalToConstant: 22),
             deleteHabitButton.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])

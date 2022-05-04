@@ -20,7 +20,7 @@ class MakeHabitViewModel {
     }
     
     func makeAlertController() {
-        router.makeAlertController { [weak self] in
+        router.makeAlertController(title: habitTitle) { [weak self] in
             if let habit = self?.habit, let index = HabitsStore.shared.habits.firstIndex(of: habit) {
                 HabitsStore.shared.habits.remove(at: index)
                 self?.popControllerCompletion?()

@@ -18,7 +18,7 @@ class HabitDetailsViewModel {
     }
     
     func getDates() -> [Date] {
-        HabitsStore.shared.dates
+        habit.trackDates
     }
     
     func editHabit(habit: Habit) {

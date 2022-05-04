@@ -9,6 +9,9 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    var checkHabitCompletion: VoidCompletion?
+    private var habit: Habit?
+    
     private lazy var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -39,7 +42,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont(name: "SFProText-Regular", size: 13)
         label.textColor = .systemGrayColor
-        label.text = "Счётчик: 4"
         return label
         
     }()
@@ -48,8 +50,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 19
+        button.addTarget(self, action: #selector(checkHabitAction), for: .touchUpInside)
         return button
-        
     }()
     
     override init(frame: CGRect) {
@@ -63,10 +65,24 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
     func setup(habit: Habit) {
+        self.habit = habit
         titleLabel.text = habit.name
         titleLabel.textColor = habit.color
         descriptionLabel.text = "Каждый день в \(habit.dateString)"
+        counterLabel.text = "Счётчик: \(habit.trackDates.count)"
         checkButton.layer.borderColor = habit.color.cgColor
+        
+        let isTracking = HabitsStore.shared.habit(habit, isTrackedIn: Date())
+        checkButton.backgroundColor = isTracking ? habit.color : .clear
+        
+        let image = isTracking ? UIImage(named: "checkBox") : nil
+        checkButton.setImage(image, for: .normal)
+    }
+    
+    @objc private func checkHabitAction() {
+        guard let habit = habit, !HabitsStore.shared.habit(habit, isTrackedIn: Date()) else { return }
+        HabitsStore.shared.track(habit)
+        checkHabitCompletion?()
     }
     
     private func configureUI() {
@@ -87,11 +103,11 @@ class HabitCollectionViewCell: UICollectionViewCell {
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -103),
-
+            
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -103),
-
+            
             counterLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -20),
             counterLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             counterLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -103),

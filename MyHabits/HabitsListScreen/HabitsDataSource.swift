@@ -36,10 +36,15 @@ extension HabitsDataSource: UICollectionViewDataSource {
         guard let sections = Sections(rawValue: indexPath.section) else { return UICollectionViewCell() }
         switch sections {
         case .progress:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgressCollectionViewCell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgressCollectionViewCell", for: indexPath) as!
+            ProgressCollectionViewCell
+            cell.setup(HabitsStore.shared.todayProgress)
             return cell
         case .habit:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HabitCollectionViewCell", for: indexPath) as! HabitCollectionViewCell
+            cell.checkHabitCompletion = {
+                collectionView.reloadData()
+            }
             cell.setup(habit: habits[indexPath.item])
             return cell
         }

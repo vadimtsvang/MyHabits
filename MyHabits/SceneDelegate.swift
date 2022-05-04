@@ -21,23 +21,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let habitsVC = HabitsAssembly().build()
         habitsVC.view.backgroundColor = .white
-        habitsVC.tabBarItem = UITabBarItem(title: "Привычки", image: UIImage(named: "habbits"), tag: 0)
+        habitsVC.tabBarItem = UITabBarItem(title: habits, image: UIImage(named: "habbits"), tag: 0)
         
         let infoVC = InfoViewController()
         infoVC.view.backgroundColor = .white
-        infoVC.tabBarItem = UITabBarItem(title: "Информация", image: UIImage(named: "info"), tag: 1)
+        infoVC.tabBarItem = UITabBarItem(title: info, image: UIImage(named: "info"), tag: 1)
         
         let habitsNC = UINavigationController(rootViewController: habitsVC)
         habitsNC.navigationBar.prefersLargeTitles = true
-        habitsNC.navigationBar.topItem?.title = "Сегодня"
+        habitsNC.navigationBar.topItem?.title = today
         
         let infoNC = UINavigationController(rootViewController: infoVC)
-        infoNC.navigationBar.topItem?.title = "Информация"
+        infoNC.navigationBar.topItem?.title = info
         tabBarController.viewControllers = [habitsNC, infoNC]
         
         window?.rootViewController = tabBarController
     }
-
-
 }
-

@@ -26,6 +26,7 @@ class HabitsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
         bind()
     }
     
@@ -36,9 +37,7 @@ class HabitsViewController: UIViewController {
     
     private func configureUI() {
         view.addSubviews(habitsContentView)
-        let barButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHabit))
-        navigationItem.rightBarButtonItem = barButton
-        barButton.tintColor = .purple
+        makeBarButtonItems()
     }
     
     private func configureLayout() {
@@ -52,6 +51,17 @@ class HabitsViewController: UIViewController {
             habitsContentView.habitsListCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             habitsContentView.habitsListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func makeBarButtonItems() {
+        let barButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHabit))
+        navigationItem.rightBarButtonItem = barButton
+        barButton.tintColor = .purpleColor
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = today
+        backItem.tintColor = .purpleColor
+        navigationItem.backBarButtonItem = backItem
     }
     
     @objc func addHabit() {

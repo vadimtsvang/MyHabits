@@ -51,13 +51,13 @@ class MakeHabitViewController: UIViewController {
         //view.backgroundColor = .white
         view.addSubview(makeHabitContentView)
         navigationController?.navigationBar.barTintColor = .materialNavigationBarColor
-        let saveBarButton = UIBarButtonItem(title: "Сохранить", style: .done, target: self, action: #selector(saveHabitAction))
-        let cancelBarButton = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelButton))
+        let saveBarButton = UIBarButtonItem(title: save, style: .done, target: self, action: #selector(saveHabitAction))
+        let cancelBarButton = UIBarButtonItem(title: cancel, style: .plain, target: self, action: #selector(cancelButton))
         saveBarButton.tintColor = .purpleColor
         cancelBarButton.tintColor = .purpleColor
         navigationItem.rightBarButtonItem = saveBarButton
         navigationItem.leftBarButtonItem = cancelBarButton
-        title = "Создать"
+        title = create
     }
     
     private func configureLayout() {

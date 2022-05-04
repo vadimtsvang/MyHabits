@@ -32,11 +32,12 @@ class HabitDetailsViewController: UIViewController {
     }
     
     private func configureUI() {
-        dataSource.dates = viewModel.getDates()
         view.backgroundColor = .white
         view.addSubview(habitDetailsContentView)
         navigationItem.largeTitleDisplayMode = .never
         title = viewModel.habit.name
+        
+        dataSource.dates = viewModel.getDates()
         habitDetailsContentView.toAutoLayout()
         habitDetailsContentView.habitDetailsTableView.delegate = self
         habitDetailsContentView.habitDetailsTableView.dataSource = dataSource
